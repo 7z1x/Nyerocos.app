@@ -43,6 +43,10 @@ class ChatRepository(context: Context) {
         conversationDao.deleteConversation(id)
     }
 
+    suspend fun insertConversation(conversation: ConversationEntity) {
+        conversationDao.insertConversation(conversation)
+    }
+
     fun getMessagesForConversation(conversationId: String): Flow<List<ChatMessage>> {
         return messageDao.getMessagesForConversation(conversationId).map { entities ->
             entities.map { entity ->

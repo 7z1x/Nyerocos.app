@@ -14,11 +14,15 @@
     <string name="history_search_hint">Search conversations…</string>
     <string name="history_archive_all">Archive All</string>
     <string name="transcript_title">History</string>
-    <string name="transcript_input_hint">Minta Gemini</string>
+    <string name="transcript_input_hint">Ayo Nyerocos</string>
     <string name="microphone_icon">Microphone</string>
     <string name="back_icon">Back</string>
     <string name="you_is_user">YOU</string>
     <string name="nyerocos_ai">NYEROCOS AI</string>
     <string name="start_speaking">Start speaking</string>
     <string name="nyerocos_text">NYEROCOS</string>
+    <string name="delete_label">DELETE</string>
+    <string name="delete_desc">Delete</string>
+    <string name="chat_deleted">Chat deleted</string>
+    <string name="undo">UNDO</string>
 </resources>

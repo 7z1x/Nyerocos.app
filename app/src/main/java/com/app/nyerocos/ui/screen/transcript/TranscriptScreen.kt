@@ -16,16 +16,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -55,7 +54,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.nyerocos.R
 import com.app.nyerocos.data.model.ChatMessage
 import com.app.nyerocos.ui.theme.NyerocosBlack
-import com.app.nyerocos.ui.theme.NyerocosBlue
 import com.app.nyerocos.ui.theme.NyerocosSurface
 import com.app.nyerocos.ui.theme.NyerocosYellow
 import java.util.Locale
@@ -242,13 +240,11 @@ private fun ChatInputBar(
     onSend: () -> Unit,
     onMicClick: () -> Unit
 ) {
-    // Neo-brutalist container with shadow
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
-        // Shadow (offset, no blur)
         Box(
             modifier = Modifier
                 .matchParentSize()
@@ -264,7 +260,6 @@ private fun ChatInputBar(
                 .padding(horizontal = 8.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // + Button
             Box(
                 modifier = Modifier
                     .size(44.dp)
@@ -280,7 +275,6 @@ private fun ChatInputBar(
                 )
             }
 
-            // Text field
             TextField(
                 value = inputText,
                 onValueChange = onInputChanged,
@@ -309,7 +303,6 @@ private fun ChatInputBar(
                 enabled = !isLoading
             )
 
-            // Mic / Send button (yellow, square)
             IconButton(
                 onClick = {
                     if (inputText.isEmpty()) onMicClick() else onSend()

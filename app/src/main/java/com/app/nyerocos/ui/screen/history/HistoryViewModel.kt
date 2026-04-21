@@ -35,4 +35,10 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
             repository.deleteConversation(id)
         }
     }
+
+    fun restoreConversation(conversation: ConversationEntity) {
+        viewModelScope.launch {
+            repository.insertConversation(conversation)
+        }
+    }
 }
