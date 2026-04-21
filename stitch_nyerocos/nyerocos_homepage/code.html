@@ -1,0 +1,170 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NYEROCOS - Luxury Neo-Brutalist Voice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface": "#f5f0e8",
+                "on-tertiary": "#ffffff",
+                "surface-container-highest": "#e2ddd4",
+                "inverse-primary": "#f5f0e8",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary-container": "#1a1a1a",
+                "surface-container-high": "#e8e3da",
+                "on-error": "#ffffff",
+                "surface-container-low": "#f2ede5",
+                "surface-container": "#eee9e0",
+                "on-surface": "#1a1a1a",
+                "on-secondary": "#1a1a1a",
+                "inverse-surface": "#1a1a1a",
+                "surface-variant": "#e8e3da",
+                "error": "#cc0000",
+                "secondary": "#e63b2e",
+                "primary-fixed-dim": "#e6b800",
+                "secondary-fixed": "#ffdad6",
+                "surface-tint": "#1a1a1a",
+                "on-primary-container": "#1a1a1a",
+                "tertiary-fixed-dim": "#a8c6ff",
+                "error-container": "#ffdad6",
+                "primary": "#1a1a1a",
+                "on-tertiary-container": "#1a1a1a",
+                "on-background": "#1a1a1a",
+                "secondary-container": "#ffdad6",
+                "tertiary": "#0055ff",
+                "on-primary": "#ffffff",
+                "secondary-fixed-dim": "#ffb3ab",
+                "primary-container": "#ffcc00",
+                "on-tertiary-fixed": "#1a1a1a",
+                "primary-fixed": "#ffcc00",
+                "tertiary-fixed": "#d6e3ff",
+                "inverse-on-surface": "#f5f0e8",
+                "surface-bright": "#faf7f2",
+                "on-secondary-fixed": "#1a1a1a",
+                "surface-dim": "#d6d1c9",
+                "on-error-container": "#93000a",
+                "on-secondary-fixed-variant": "#1a1a1a",
+                "tertiary-container": "#d6e3ff",
+                "outline-variant": "#d0cbc3",
+                "outline": "#1a1a1a",
+                "on-primary-fixed-variant": "#1a1a1a",
+                "on-tertiary-fixed-variant": "#1a1a1a",
+                "on-surface-variant": "#4a4a4a",
+                "background": "#f5f0e8",
+                "on-primary-fixed": "#1a1a1a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "body": ["Inter"],
+                "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .neo-shadow-lg {
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+        .neo-shadow-inset {
+            box-shadow: inset 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .pill-button {
+            border-radius: 9999px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .pill-button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-white text-stone-900 font-body antialiased min-h-screen selection:bg-yellow-400">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-white dark:bg-stone-950 border-b-2 border-stone-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<div class="flex items-center gap-2"><button class="w-10 h-10 bg-white border-2 border-stone-900 flex items-center justify-center neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all" style="">
+<span class="material-symbols-outlined text-stone-900" data-icon="menu" style="">menu</span>
+</button></div>
+<h1 class="text-2xl font-black tracking-tighter uppercase text-stone-900 dark:text-stone-50 font-headline" style="">
+            NYEROCOS
+        </h1>
+<button class="hover:bg-yellow-400 dark:hover:bg-yellow-500 transition-colors p-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all" style="">
+</button>
+</header>
+<main class="pt-24 pb-32 px-6 flex flex-col min-h-screen justify-center items-center gap-16 overflow-hidden">
+<!-- Central Focus: Large Minimalist Microphone -->
+<div class="relative group">
+<div class="absolute inset-0 bg-yellow-400 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative w-48 h-48 md:w-64 md:h-64 border-4 border-stone-900 rounded-full flex items-center justify-center bg-white neo-shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+<span class="material-symbols-outlined text-8xl md:text-9xl text-stone-900 select-none" data-icon="mic" style="font-variation-settings: &quot;wght&quot; 200;">mic</span>
+</div>
+<!-- Decorative Neo-Brutalist Element -->
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-secondary border-2 border-stone-900 flex items-center justify-center neo-shadow">
+<span class="material-symbols-outlined text-white" data-icon="auto_awesome" style="">auto_awesome</span>
+</div>
+</div>
+<!-- Headline Content -->
+<div class="text-center max-w-xs space-y-4">
+<h2 class="font-headline font-black text-5xl tracking-tighter leading-none uppercase" style="">Talk what ever you want</h2>
+<p class="font-body text-stone-600 font-medium" style="">Learning platform to impove your english skill</p>
+</div>
+<!-- Mode Selection Buttons -->
+<div class="w-full max-w-sm flex flex-col gap-6">
+<!-- Interview Button (Active/Example) -->
+<button class="pill-button w-full py-5 bg-white border-4 border-stone-900 neo-shadow flex items-center justify-between px-10 hover:bg-yellow-400 group" style="">
+<span class="font-headline font-black text-2xl uppercase tracking-tight" style="">Interview</span>
+<span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform" data-icon="record_voice_over" style="">record_voice_over</span>
+</button>
+<!-- Study Button -->
+<button class="pill-button w-full py-5 bg-white border-4 border-stone-900 neo-shadow flex items-center justify-between px-10 hover:bg-yellow-400 group" style="">
+<span class="font-headline font-black text-2xl uppercase tracking-tight" style="">Study</span>
+<span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform" data-icon="menu_book" style="">menu_book</span>
+</button>
+<!-- Chill Button -->
+<button class="pill-button w-full py-5 bg-white border-4 border-stone-900 neo-shadow flex items-center justify-between px-10 hover:bg-yellow-400 group" style="">
+<span class="font-headline font-black text-2xl uppercase tracking-tight" style="">Chill</span>
+<span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform" data-icon="bedtime" style="">bedtime</span>
+</button>
+</div>
+<!-- Status Card (Bento Style Item) -->
+</main>
+<!-- Visual Aesthetic Filler: Asymmetric Decorative Image -->
+<div class="hidden lg:block fixed top-32 -left-20 w-64 h-96 border-4 border-stone-900 transform -rotate-12 neo-shadow-lg overflow-hidden bg-stone-100">
+<img alt="Luxury studio microphone" class="w-full h-full object-cover grayscale" data-alt="A vintage high-end silver studio condenser microphone on a stand against a clean off-white studio background, professional lighting, cinematic detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBq1ezFLWvWuDMHDHic2Lk77MY29On-SiVXWhE3eA0gSMSp4I_242ChKxk2-UZeSGi5-ZDURVG9jYcVBsUO8RIqd5Sc-pEzBdGLecoP5eSPpKu3ESLebVJGTd3SfExEqXpSJjQzRo4QzJFLKLRPxBLteWexgycEJWIxV22qbBPII0NUhYzK5g_8GJbNFMkHaznWMN-29C0AFzp65VHo38sVlrOQ8kDSBkfMTukTbfeHUzogQldv14oaTzIqEToDFDyURVUZKDs2d0" style="">
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-white dark:bg-stone-900 border-t-2 border-stone-900 shadow-[0_-4px_0px_0px_rgba(0,0,0,1)]"><!-- Call Tab (Active) -->
+<a class="flex flex-col items-center justify-center bg-yellow-400 text-stone-900 rounded-full px-10 py-2 border-4 border-stone-900 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:scale-105 transition-transform active:translate-x-[2px] active:translate-y-[2px] active:shadow-none" href="#" style="">
+<span class="material-symbols-outlined" data-icon="call" style="font-variation-settings: &quot;FILL&quot; 1;">call</span>
+<span class="font-['Space_Grotesk'] font-black uppercase text-[12px] tracking-tight" style="">Call</span>
+</a>
+<!-- History Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-stone-900 dark:text-stone-50 px-10 py-2 hover:scale-105 transition-transform active:scale-95 group" href="#" style="">
+<span class="material-symbols-outlined group-hover:rotate-[-10deg] transition-transform" data-icon="history" style="">history</span>
+<span class="font-['Space_Grotesk'] font-bold uppercase text-[12px] tracking-tight" style="">History</span>
+</a></nav>
+</body></html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#a8c6ff",
+                    "surface-container": "#eee9e0",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#1a1a1a",
+                    "surface": "#f5f0e8",
+                    "surface-dim": "#d6d1c9",
+                    "secondary-fixed-dim": "#ffb3ab",
+                    "inverse-surface": "#1a1a1a",
+                    "error": "#cc0000",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e2ddd4",
+                    "on-tertiary-fixed-variant": "#1a1a1a",
+                    "secondary-container": "#ffdad6",
+                    "primary-fixed": "#ffcc00",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#4a4a4a",
+                    "surface-variant": "#e8e3da",
+                    "secondary": "#e63b2e",
+                    "background": "#f5f0e8",
+                    "tertiary-container": "#d6e3ff",
+                    "surface-container-high": "#e8e3da",
+                    "on-secondary": "#1a1a1a",
+                    "on-surface": "#1a1a1a",
+                    "surface-tint": "#1a1a1a",
+                    "tertiary": "#0055ff",
+                    "on-primary-fixed": "#1a1a1a",
+                    "inverse-on-surface": "#f5f0e8",
+                    "surface-container-low": "#f2ede5",
+                    "primary-fixed-dim": "#e6b800",
+                    "on-tertiary-container": "#1a1a1a",
+                    "on-secondary-fixed-variant": "#1a1a1a",
+                    "inverse-primary": "#f5f0e8",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#d6e3ff",
+                    "primary": "#1a1a1a",
+                    "on-tertiary-fixed": "#1a1a1a",
+                    "outline-variant": "#d0cbc3",
+                    "outline": "#1a1a1a",
+                    "on-primary-container": "#1a1a1a",
+                    "on-secondary-fixed": "#1a1a1a",
+                    "on-secondary-container": "#1a1a1a",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#ffcc00",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#ffdad6",
+                    "on-background": "#1a1a1a",
+                    "surface-bright": "#faf7f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-brutalist-card {
+            border: 2px solid #1a1a1a;
+            box-shadow: 4px 4px 0px 0px #1a1a1a;
+        }
+        .neo-brutalist-card:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #1a1a1a;
+        }
+        .dot-grid-bg {
+            background-color: #262626;
+            background-image: radial-gradient(#4a4a4a 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="flex items-center justify-center px-6 py-4 w-full bg-[#f5f0e8] dark:bg-stone-900 border-b-4 border-[#1a1a1a] shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] sticky top-0 z-40">
+<div class="flex items-center justify-center w-full">
+<h1 class="font-['Space_Grotesk'] font-bold uppercase tracking-tighter text-[#1a1a1a] text-xl md:text-2xl">Chat History</h1>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-4xl mx-auto px-4 py-8">
+<!-- Search/Filter Bar (Asymmetric Layout) -->
+<div class="mb-10 flex flex-col md:flex-row gap-4 items-stretch">
+<div class="flex-grow flex items-center bg-white border-2 border-primary px-4 py-3 shadow-[4px_4px_0px_0px_rgba(26,26,26,1)]">
+<span class="material-symbols-outlined mr-3">filter_list</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-label uppercase text-sm" placeholder="Search conversations..." type="text"/>
+</div>
+<div class="bg-tertiary text-white px-6 py-3 flex items-center justify-center border-2 border-primary shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] font-headline font-bold uppercase cursor-pointer hover:bg-primary transition-colors">
+                Archive All
+            </div>
+</div>
+<!-- Conversation List -->
+<div class="space-y-6">
+<!-- Conversation Card 1 (Yellow) -->
+<div class="neo-brutalist-card bg-[#ffcc00] p-5 flex items-center gap-4 cursor-pointer">
+<div class="flex-shrink-0 w-16 h-16 bg-white border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-lg truncate uppercase tracking-tight">Project X Brainstorm</h3>
+<span class="font-label text-[10px] font-bold bg-primary text-white px-2 py-0.5 ml-2">2M AGO</span>
+</div>
+<p class="text-sm line-clamp-1 opacity-90">What if we used the brutalist aesthetic for the entire dashboard module?</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-2 ml-4">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<span class="material-symbols-outlined text-primary opacity-60">chevron_right</span>
+</div>
+</div>
+<!-- Conversation Card 2 (White) -->
+<div class="neo-brutalist-card bg-white p-5 flex items-center gap-4 cursor-pointer">
+<div class="flex-shrink-0 w-16 h-16 bg-[#0055ff] text-white border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl">language</span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-lg truncate uppercase tracking-tight">Global Strategy Sync</h3>
+<span class="font-label text-[10px] font-bold text-primary px-2 py-0.5 ml-2">1H AGO</span>
+</div>
+<p class="text-sm line-clamp-1 opacity-70">The feedback from the Tokyo team was surprisingly positive about the color...</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-2 ml-4">
+<span class="material-symbols-outlined text-primary opacity-60">chevron_right</span>
+</div>
+</div>
+<!-- Conversation Card 3 (Yellow) -->
+<div class="neo-brutalist-card bg-[#ffcc00] p-5 flex items-center gap-4 cursor-pointer">
+<div class="flex-shrink-0 w-16 h-16 bg-white border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">token</span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-lg truncate uppercase tracking-tight">Component Library v3</h3>
+<span class="font-label text-[10px] font-bold bg-primary text-white px-2 py-0.5 ml-2">4H AGO</span>
+</div>
+<p class="text-sm line-clamp-1 opacity-90">I've updated the button borders to 4px as discussed in the review session.</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-2 ml-4">
+<span class="material-symbols-outlined text-primary opacity-60">chevron_right</span>
+</div>
+</div>
+<!-- Conversation Card 4 (White) -->
+<div class="neo-brutalist-card bg-white p-5 flex items-center gap-4 cursor-pointer">
+<div class="flex-shrink-0 w-16 h-16 bg-secondary text-white border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl">warning</span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-lg truncate uppercase tracking-tight">Urgent: Server Logs</h3>
+<span class="font-label text-[10px] font-bold text-primary px-2 py-0.5 ml-2">6H AGO</span>
+</div>
+<p class="text-sm line-clamp-1 opacity-70">Can you check the spike in traffic from the North American region?</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-2 ml-4">
+<span class="material-symbols-outlined text-primary opacity-60">chevron_right</span>
+</div>
+</div>
+<!-- Conversation Card 5 (Yellow) -->
+<div class="neo-brutalist-card bg-[#ffcc00] p-5 flex items-center gap-4 cursor-pointer">
+<div class="flex-shrink-0 w-16 h-16 bg-white border-2 border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
+<div class="flex-grow min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline font-bold text-lg truncate uppercase tracking-tight">Bauhaus Review</h3>
+<span class="font-label text-[10px] font-bold bg-primary text-white px-2 py-0.5 ml-2">1D AGO</span>
+</div>
+<p class="text-sm line-clamp-1 opacity-90">The grid system needs to be more rigid. Let's stick to the 8pt baseline strictly.</p>
+</div>
+<div class="hidden sm:flex flex-col items-end gap-2 ml-4">
+<span class="material-symbols-outlined text-primary opacity-60">chevron_right</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Area -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<nav class="flex justify-around items-center h-24 bg-[#f5f0e8] border-t-4 border-[#1a1a1a] px-8"><!-- Call Tab (Inactive) -->
+<div class="flex-1 flex justify-center">
+<a class="flex flex-col items-center justify-center transition-opacity hover:opacity-70" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">call</span>
+<span class="font-headline font-bold uppercase text-xs tracking-wider">Call</span>
+</a>
+</div>
+<!-- History Tab (Active) -->
+<div class="flex-1 flex justify-center">
+<a class="flex flex-col items-center justify-center bg-[#ffcc00] border-[3px] border-[#1a1a1a] shadow-[4px_4px_0px_0px_rgba(26,26,26,1)] px-6 py-2 rounded-xl transition-transform active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0px_0px_rgba(26,26,26,1)]" href="#">
+<span class="material-symbols-outlined text-2xl mb-1 text-[#1a1a1a]" style="font-variation-settings: 'FILL' 1, 'wght' 700;">history</span>
+<span class="font-headline font-bold uppercase text-xs tracking-wider text-[#1a1a1a]">History</span>
+</a>
+</div></nav>
+</div>
+</body></html>

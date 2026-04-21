@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NYEROCOS - Live Voice Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f0e8;
+        }
+        .font-headline {
+            font-family: 'Space_Grotesk', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f2ede5",
+                    "on-primary-fixed": "#1a1a1a",
+                    "primary-fixed": "#ffcc00",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#1a1a1a",
+                    "tertiary-container": "#d6e3ff",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#1a1a1a",
+                    "on-primary-fixed-variant": "#1a1a1a",
+                    "on-secondary-fixed": "#1a1a1a",
+                    "error-container": "#ffdad6",
+                    "secondary": "#e63b2e",
+                    "tertiary-fixed": "#d6e3ff",
+                    "surface-bright": "#faf7f2",
+                    "on-tertiary-fixed": "#1a1a1a",
+                    "outline": "#1a1a1a",
+                    "on-primary-container": "#1a1a1a",
+                    "surface-container-high": "#e8e3da",
+                    "primary-container": "#ffcc00",
+                    "surface-variant": "#e8e3da",
+                    "on-secondary-fixed-variant": "#1a1a1a",
+                    "tertiary": "#0055ff",
+                    "surface-container-highest": "#e2ddd4",
+                    "on-tertiary-fixed-variant": "#1a1a1a",
+                    "surface-container": "#eee9e0",
+                    "on-surface-variant": "#4a4a4a",
+                    "on-surface": "#1a1a1a",
+                    "secondary-fixed": "#ffdad6",
+                    "inverse-surface": "#1a1a1a",
+                    "background": "#f5f0e8",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#ffb3ab",
+                    "primary": "#1a1a1a",
+                    "error": "#cc0000",
+                    "primary-fixed-dim": "#e6b800",
+                    "inverse-primary": "#f5f0e8",
+                    "surface": "#f5f0e8",
+                    "tertiary-fixed-dim": "#a8c6ff",
+                    "outline-variant": "#d0cbc3",
+                    "on-background": "#1a1a1a",
+                    "on-tertiary-container": "#1a1a1a",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d6d1c9",
+                    "on-secondary": "#1a1a1a",
+                    "inverse-on-surface": "#f5f0e8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Space Grotesk"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Space Grotesk"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-white dark:bg-stone-950 border-b-2 border-stone-900 dark:border-stone-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 text-stone-900 dark:text-stone-50 hover:bg-yellow-400 dark:hover:bg-yellow-500 transition-colors active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+</button>
+</div>
+<h1 class="text-2xl font-black tracking-tighter uppercase text-stone-900 dark:text-stone-50 font-headline">
+            NYEROCOS
+        </h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center px-6 pt-20 pb-32">
+<!-- Call Status Info -->
+<div class="mb-8 text-center">
+<span class="px-3 py-1 bg-primary text-on-primary font-headline font-bold text-xs uppercase tracking-widest border-2 border-primary mb-4 inline-block">
+                Live Session
+            </span>
+<h2 class="text-4xl md:text-6xl font-headline font-black tracking-tighter uppercase leading-none">
+                AI Voice Synthesis
+            </h2>
+<p class="mt-2 font-medium opacity-70 uppercase tracking-tight text-sm">Active Duration: 04:22</p>
+</div>
+<!-- Geometric Voice Visualizer -->
+<div class="relative w-full max-w-md aspect-square flex items-center justify-center">
+<!-- Background Accent Shape -->
+<div class="absolute inset-0 bg-primary-fixed border-4 border-primary shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] rotate-3"></div>
+<!-- Visualizer Bars Container -->
+<div class="relative z-10 w-full h-full border-4 border-primary bg-white p-8 flex items-end justify-center gap-2 overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+<!-- Static Bars representing a 'captured' wave state (Neo-Brutalist Bauhaus style) -->
+<div class="w-full bg-secondary border-2 border-primary h-[30%]"></div>
+<div class="w-full bg-primary border-2 border-primary h-[60%]"></div>
+<div class="w-full bg-tertiary border-2 border-primary h-[45%]"></div>
+<div class="w-full bg-primary-fixed border-2 border-primary h-[85%]"></div>
+<div class="w-full bg-secondary border-2 border-primary h-[55%]"></div>
+<div class="w-full bg-primary border-2 border-primary h-[70%]"></div>
+<div class="w-full bg-tertiary border-2 border-primary h-[35%]"></div>
+<div class="w-full bg-primary-fixed border-2 border-primary h-[95%]"></div>
+<div class="w-full bg-secondary border-2 border-primary h-[65%]"></div>
+<div class="w-full bg-primary border-2 border-primary h-[40%]"></div>
+</div>
+<!-- Decorative Label -->
+</div>
+<!-- Call Controls -->
+<div class="mt-12 flex items-center gap-6">
+<button class="w-16 h-16 flex items-center justify-center bg-white border-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-3xl" data-icon="mic_off">mic_off</span>
+</button>
+<!-- END CALL BUTTON -->
+<button class="px-10 py-4 bg-secondary text-on-primary border-4 border-primary shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all hover:invert group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-2xl font-bold" data-icon="call_end">call_end</span>
+<span class="font-headline font-black uppercase text-xl tracking-tighter">End Call</span>
+</div>
+</button>
+<button class="w-16 h-16 flex items-center justify-center bg-white border-4 border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-3xl" data-icon="volume_up">volume_up</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+</body></html>
