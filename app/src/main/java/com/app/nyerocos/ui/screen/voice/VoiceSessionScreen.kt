@@ -1,17 +1,8 @@
 package com.app.nyerocos.ui.screen.voice
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.speech.RecognizerIntent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +31,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,13 +41,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.nyerocos.R
+import com.app.nyerocos.ui.components.WaveformVisualizer
 import com.app.nyerocos.ui.theme.NyerocosBlack
-import com.app.nyerocos.ui.theme.NyerocosBlue
 import com.app.nyerocos.ui.theme.NyerocosRed
 import com.app.nyerocos.ui.theme.NyerocosSurface
 import com.app.nyerocos.ui.theme.NyerocosYellow
 import java.util.Locale
-import kotlin.random.Random
 
 @Composable
 fun VoiceSessionScreen(
@@ -69,52 +58,17 @@ fun VoiceSessionScreen(
         viewModel.setMode(mode)
     }
 
-    val uiState by viewModel.uiState.collectAsState()
-
-    val speechLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val spokenText = result.data
-                ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                ?.firstOrNull() ?: ""
-            viewModel.onSpeechResult(spokenText)
-        } else {
-            viewModel.setListening(false)
-        }
+    LaunchedEffect(Unit) {
+        viewModel.initSpeechRecognizer()
     }
+
+    val uiState by viewModel.uiState.collectAsState()
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            viewModel.setListening(true)
-            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-                )
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-                putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now...")
-            }
-            speechLauncher.launch(intent)
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.onAiFinishedSpeaking = {
-            if (uiState.isCallActive) {
-                viewModel.setListening(true)
-                val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-                    putExtra(
-                        RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-                    )
-                    putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-                    putExtra(RecognizerIntent.EXTRA_PROMPT, "Your turn...")
-                }
-                speechLauncher.launch(intent)
-            }
+            viewModel.startListening()
         }
     }
 
@@ -230,9 +184,10 @@ fun VoiceSessionScreen(
                     modifier = Modifier.matchParentSize()
                 ) {}
 
-                WaveformBars(
+                WaveformVisualizer(
                     isActive = uiState.isAiSpeaking || uiState.isListening,
-                    isAiSpeaking = uiState.isAiSpeaking
+                    isAiSpeaking = uiState.isAiSpeaking,
+                    rmsLevel = uiState.rmsLevel
                 )
             }
         }
@@ -257,7 +212,6 @@ fun VoiceSessionScreen(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Mute button
             ControlButton(
                 icon = Icons.Default.MicOff,
                 contentDescription = "Mute",
@@ -329,62 +283,4 @@ private fun ControlButton(
     }
 }
 
-@Composable
-private fun WaveformBars(
-    isActive: Boolean,
-    isAiSpeaking: Boolean
-) {
-    val barColors = listOf(
-        NyerocosRed, NyerocosBlack, NyerocosBlue, NyerocosRed,
-        NyerocosYellow, NyerocosBlack, NyerocosYellow, NyerocosBlack,
-        NyerocosBlue, NyerocosRed, NyerocosYellow, NyerocosBlack,
-        NyerocosRed, NyerocosBlack
-    )
 
-    val infiniteTransition = rememberInfiniteTransition(label = "waveform")
-
-    val barHeights = List(barColors.size) { index ->
-        val baseHeight = remember { Random.nextFloat() * 0.5f + 0.3f }
-        if (isActive) {
-            infiniteTransition.animateFloat(
-                initialValue = 0.2f,
-                targetValue = baseHeight + Random.nextFloat() * 0.3f,
-                animationSpec = infiniteRepeatable(
-                    animation = tween(
-                        durationMillis = 400 + (index * 80),
-                        easing = LinearEasing
-                    ),
-                    repeatMode = RepeatMode.Reverse
-                ),
-                label = "bar_$index"
-            ).value
-        } else {
-            0.15f
-        }
-    }
-
-    Row(
-        modifier = Modifier.fillMaxSize(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.Bottom
-    ) {
-        barColors.forEachIndexed { index, color ->
-            val heightFraction = barHeights[index]
-            Box(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 2.dp)
-                    .fillMaxSize()
-            ) {
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .fillMaxSize(fraction = heightFraction)
-                        .background(color)
-                        .border(1.dp, NyerocosBlack)
-                )
-            }
-        }
-    }
-}

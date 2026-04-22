@@ -65,7 +65,10 @@ fun NyerocosApp() {
                         TranscriptRoute(conversationId = conversationId))
                 },
                 onNavigateToHome = {
-                    navController.popBackStack()
+                    navController.navigate(HomeRoute) {
+                        popUpTo(HomeRoute) { inclusive = false }
+                        launchSingleTop = true
+                    }
                 }
             )
         }

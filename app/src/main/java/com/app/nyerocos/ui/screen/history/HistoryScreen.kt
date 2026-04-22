@@ -61,6 +61,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.nyerocos.R
 import com.app.nyerocos.data.local.entity.ConversationEntity
+import com.app.nyerocos.ui.components.BottomTab
+import com.app.nyerocos.ui.components.NyerocosBottomBar
 import com.app.nyerocos.ui.theme.NyerocosBlack
 import com.app.nyerocos.ui.theme.NyerocosBlue
 import com.app.nyerocos.ui.theme.NyerocosRed
@@ -93,6 +95,14 @@ fun HistoryScreen(
 
     Scaffold(
         containerColor = NyerocosSurface,
+        bottomBar = {
+            NyerocosBottomBar(
+                selectTab = BottomTab.HISTORY,
+                onTabSelected = { tab ->
+                    if (tab == BottomTab.CALL) onNavigateToHome()
+                }
+            )
+        },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState) { data ->
                 Snackbar(
@@ -121,7 +131,6 @@ fun HistoryScreen(
                     .align(Alignment.CenterHorizontally)
             )
 
-            // Divider
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
