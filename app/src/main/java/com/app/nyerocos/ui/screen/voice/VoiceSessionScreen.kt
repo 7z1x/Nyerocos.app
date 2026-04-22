@@ -1,6 +1,7 @@
 package com.app.nyerocos.ui.screen.voice
 
 import android.Manifest
+import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -22,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.CallEnd
+import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.MicOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,11 +36,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.nyerocos.R
 import com.app.nyerocos.ui.components.WaveformVisualizer
@@ -54,21 +58,29 @@ fun VoiceSessionScreen(
     onEndCall: () -> Unit,
     viewModel: VoiceSessionViewModel = viewModel()
 ) {
-    LaunchedEffect(mode) {
-        viewModel.setMode(mode)
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.initSpeechRecognizer()
-    }
-
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            viewModel.startListening()
+            viewModel.startAudio()
+        }
+    }
+
+    // Immediately start connecting (no permission needed for WebSocket)
+    // Then request permission in parallel
+    LaunchedEffect(mode) {
+        viewModel.prepareSession(mode)
+
+        val hasPermission = ContextCompat.checkSelfPermission(
+            context, Manifest.permission.RECORD_AUDIO
+        ) == PackageManager.PERMISSION_GRANTED
+        if (hasPermission) {
+            viewModel.startAudio()
+        } else {
+            permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
         }
     }
 
@@ -77,10 +89,11 @@ fun VoiceSessionScreen(
     val timeFormatted = String.format(Locale.US, "%02d:%02d", minutes, seconds)
 
     val statusText = when {
-        uiState.isAiSpeaking -> "AI SPEAKING..."
-        uiState.isProcessing -> "THINKING..."
-        uiState.isListening -> "LISTENING..."
-        else -> "TAP TO START"
+        uiState.error != null -> "CONNECTION ERROR"
+        uiState.isMuted -> "MUTED"
+        uiState.isConnecting -> "CONNECTING..."
+        uiState.isConversing -> "LIVE"
+        else -> "STARTING..."
     }
 
     Column(
@@ -149,6 +162,7 @@ fun VoiceSessionScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Waveform area
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -177,34 +191,45 @@ fun VoiceSessionScreen(
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                IconButton(
-                    onClick = {
-                        permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
-                    },
-                    modifier = Modifier.matchParentSize()
-                ) {}
-
                 WaveformVisualizer(
-                    isActive = uiState.isAiSpeaking || uiState.isListening,
-                    isAiSpeaking = uiState.isAiSpeaking,
-                    rmsLevel = uiState.rmsLevel
+                    isActive = uiState.isConversing && !uiState.isMuted,
+                    isAiSpeaking = uiState.isConversing
                 )
             }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        if (uiState.lastSpokenText.isNotEmpty()) {
+        // Live transcription
+        if (uiState.lastUserText.isNotEmpty() || uiState.lastAiText.isNotEmpty()) {
+            val displayText = when {
+                uiState.lastAiText.isNotEmpty() -> "AI: ${uiState.lastAiText}"
+                else -> "\"${uiState.lastUserText}\""
+            }
             Text(
-                text = "\"${uiState.lastSpokenText}\"",
+                text = displayText,
                 style = MaterialTheme.typography.bodySmall,
                 color = NyerocosBlack.copy(alpha = 0.5f),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 32.dp),
+                maxLines = 2
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        // Error message
+        if (uiState.error != null) {
+            Text(
+                text = uiState.error ?: "",
+                style = MaterialTheme.typography.bodySmall,
+                color = NyerocosRed,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 32.dp)
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
 
+        // Control buttons
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -213,9 +238,9 @@ fun VoiceSessionScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             ControlButton(
-                icon = Icons.Default.MicOff,
-                contentDescription = "Mute",
-                onClick = { /* TODO: toggle mute */ }
+                icon = if (uiState.isMuted) Icons.Default.MicOff else Icons.Default.Mic,
+                contentDescription = if (uiState.isMuted) "Unmute" else "Mute",
+                onClick = { viewModel.toggleMute() }
             )
 
             IconButton(
@@ -282,5 +307,3 @@ private fun ControlButton(
         )
     }
 }
-
-
